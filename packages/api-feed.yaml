@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend-feed
+  name: backend-feed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-feed
+  template:
+    metadata:
+      labels:
+        app: backend-feed
+    spec:
+      containers:
+      - image: sedjro/udacity-udagram-api-feed
+        name: backend-feed
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        resources: {}
+        env:
+          - name: POSTGRES_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: secretvals
+                key: POSTGRES_USERNAME
+          - name:  POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: secretvals
+                key: POSTGRES_PASSWORD
+          - name:  POSTGRES_DB
+            valueFrom:
+              secretKeyRef:
+                name: secretvals
+                key: POSTGRES_DB
+          - name:  POSTGRES_HOST
+            valueFrom:
+              secretKeyRef:
+                name: secretvals
+                key: POSTGRES_HOST
+          - name:  AWS_BUCKET
+            valueFrom:
+              secretKeyRef:
+                name: secretvals
+                key: AWS_BUCKET
+          - name:  JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: secretvals
+                key: JWT_SECRET
+          - name:  AWS_REGION
+            valueFrom:
+              configMapKeyRef:
+                name: pubvals
+                key: AWS_REGION
+          - name:  AWS_PROFILE
+            valueFrom:
+              configMapKeyRef:
+                name: pubvals
+                key: AWS_PROFILE
+          - name:  URL
+            value: "http://localhost:8080"
+        volumeMounts:
+            - name: awscreds
+              mountPath: /root/.aws
+              readOnly: true
+      volumes:
+        - name: awscreds
+          secret:
+            secretName: awscreds
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: backend-feed
+  name: backend-feed
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: backend-feed
+  type: ClusterIP
+

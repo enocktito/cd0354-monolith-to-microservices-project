@@ -1,13 +1,13 @@
 version: "3"
 services:
-  reverseproxy:
-    build:
-      context: ./udagram-reverseproxy
-    image: sedjro/udacity-reverseproxy
-  backend_user:
-    build:
-      context: ./udagram-api-user
-    image: sedjro/udacity-udagram-api-user
+  # reverseproxy:
+  #   build:
+  #     context: ./udagram-reverseproxy
+  #   image: sedjro/udacity-reverseproxy
+  # backend_user:
+  #   build:
+  #     context: ./udagram-api-user
+  #   image: sedjro/udacity-udagram-api-user
   backend_feed:
     build:
       context: ./udagram-api-feed
