@@ -37,5 +37,5 @@ spec:
     targetPort: 8080
   selector:
     app: proxy
-  type: ClusterIP
+  type: LoadBalancer
 
