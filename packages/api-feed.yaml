@@ -24,9 +24,9 @@ spec:
          requests:
            cpu: 100m
            memory: "256Mi"
-         limits:
-           cpu: 1000m
-           memory: "1Gi"
+        #  limits:
+        #    cpu: 1000m
+        #    memory: "1Gi"
         env:
           - name: POSTGRES_USERNAME
             valueFrom:
