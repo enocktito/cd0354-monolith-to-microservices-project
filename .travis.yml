@@ -10,7 +10,7 @@ script:
 
 after_success:
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- docker push sedjro/udacity-reverseproxy
-- docker push sedjro/udacity-udagram-api-user
+# - docker push sedjro/udacity-reverseproxy
+# - docker push sedjro/udacity-udagram-api-user
 - docker push sedjro/udacity-udagram-api-feed
 - docker push sedjro/udacity-udagram-frontend
