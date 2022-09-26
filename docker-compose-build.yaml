@@ -8,10 +8,10 @@ services:
   #   build:
   #     context: ./udagram-api-user
   #   image: sedjro/udacity-udagram-api-user
-  backend_feed:
-    build:
-      context: ./udagram-api-feed
-    image: sedjro/udacity-udagram-api-feed
+  # backend_feed:
+  #   build:
+  #     context: ./udagram-api-feed
+  #   image: sedjro/udacity-udagram-api-feed
   frontend:
     build:
       context: ./udagram-frontend
